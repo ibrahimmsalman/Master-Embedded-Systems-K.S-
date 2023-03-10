@@ -1,0 +1,6 @@
+"./Inc/inc/LED.o"
+"./Src/main.o"
+"./Src/syscalls.o"
+"./Src/sysmem.o"
+"./Startup/startup_stm32f103c6tx.o"
+"./Stm32_F103C6_Drivers/GPIO/STM32F103x8_gpio_driver.o"
