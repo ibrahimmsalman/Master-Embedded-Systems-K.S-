@@ -1,0 +1,140 @@
+/*
+ * LED_MATRIX_Program.c
+ *
+ *  Created on: May 7, 2024
+ *      Author: Admin
+ */
+
+/*****************LIB*************************/
+#include "../include/LIB/BIT_MATH.h"
+#include "../include/LIB/STD_Types.h"
+
+
+/****************MCAL************************/
+#include "../include/HAL/HLED_MATRIX/HLED_MATRIX_Config.h"
+#include "../include/HAL/HLED_MATRIX/HLED_MATRIX_Interface.h"
+#include "../include/HAL/HLED_MATRIX/HLED_MATRIX_Private.h"
+#include "../include/MCAL/MGPIO/MGPIO_Interface.h"
+#include "../include/MCAL/MSYSTICK/MSYSTICK_Interface.h"
+
+void HLEDMRX_voidDisableColumns()
+{
+	MGPIO_voidSetPinValue(COLUMNS_PORT,C0,GPIO_PIN_HIGH);
+	MGPIO_voidSetPinValue(COLUMNS_PORT,C1,GPIO_PIN_HIGH);
+	MGPIO_voidSetPinValue(COLUMNS_PORT,C2,GPIO_PIN_HIGH);
+	MGPIO_voidSetPinValue(COLUMNS_PORT,C3,GPIO_PIN_HIGH);
+	MGPIO_voidSetPinValue(COLUMNS_PORT,C4,GPIO_PIN_HIGH);
+	MGPIO_voidSetPinValue(COLUMNS_PORT,C5,GPIO_PIN_HIGH);
+	MGPIO_voidSetPinValue(COLUMNS_PORT,C6,GPIO_PIN_HIGH);
+	MGPIO_voidSetPinValue(COLUMNS_PORT,C7,GPIO_PIN_HIGH);
+}
+
+void HLEDMRX_voidInit()
+{
+	MGPIO_voidSetPinMode(COLUMNS_PORT,C0,GPIO_OUTPUT);
+	MGPIO_voidSetPinMode(COLUMNS_PORT,C1,GPIO_OUTPUT);
+	MGPIO_voidSetPinMode(COLUMNS_PORT,C2,GPIO_OUTPUT);
+	MGPIO_voidSetPinMode(COLUMNS_PORT,C3,GPIO_OUTPUT);
+	MGPIO_voidSetPinMode(COLUMNS_PORT,C4,GPIO_OUTPUT);
+	MGPIO_voidSetPinMode(COLUMNS_PORT,C5,GPIO_OUTPUT);
+	MGPIO_voidSetPinMode(COLUMNS_PORT,C6,GPIO_OUTPUT);
+	MGPIO_voidSetPinMode(COLUMNS_PORT,C7,GPIO_OUTPUT);
+
+	MGPIO_voidSetPinOutputMode(COLUMNS_PORT,C0,GPIO_PUSH_PULL,GPIO_LOW_SPEED);
+	MGPIO_voidSetPinOutputMode(COLUMNS_PORT,C1,GPIO_PUSH_PULL,GPIO_LOW_SPEED);
+	MGPIO_voidSetPinOutputMode(COLUMNS_PORT,C2,GPIO_PUSH_PULL,GPIO_LOW_SPEED);
+	MGPIO_voidSetPinOutputMode(COLUMNS_PORT,C3,GPIO_PUSH_PULL,GPIO_LOW_SPEED);
+	MGPIO_voidSetPinOutputMode(COLUMNS_PORT,C4,GPIO_PUSH_PULL,GPIO_LOW_SPEED);
+	MGPIO_voidSetPinOutputMode(COLUMNS_PORT,C5,GPIO_PUSH_PULL,GPIO_LOW_SPEED);
+	MGPIO_voidSetPinOutputMode(COLUMNS_PORT,C6,GPIO_PUSH_PULL,GPIO_LOW_SPEED);
+	MGPIO_voidSetPinOutputMode(COLUMNS_PORT,C7,GPIO_PUSH_PULL,GPIO_LOW_SPEED);
+
+	MGPIO_voidSetPinMode(ROWS_PORT,R0,GPIO_OUTPUT);
+	MGPIO_voidSetPinMode(ROWS_PORT,R1,GPIO_OUTPUT);
+	MGPIO_voidSetPinMode(ROWS_PORT,R2,GPIO_OUTPUT);
+	MGPIO_voidSetPinMode(ROWS_PORT,R3,GPIO_OUTPUT);
+	MGPIO_voidSetPinMode(ROWS_PORT,R4,GPIO_OUTPUT);
+	MGPIO_voidSetPinMode(ROWS_PORT,R5,GPIO_OUTPUT);
+	MGPIO_voidSetPinMode(ROWS_PORT,R6,GPIO_OUTPUT);
+	MGPIO_voidSetPinMode(ROWS_PORT,R7,GPIO_OUTPUT);
+
+	MGPIO_voidSetPinOutputMode(ROWS_PORT,R0,GPIO_PUSH_PULL,GPIO_LOW_SPEED);
+	MGPIO_voidSetPinOutputMode(ROWS_PORT,R1,GPIO_PUSH_PULL,GPIO_LOW_SPEED);
+	MGPIO_voidSetPinOutputMode(ROWS_PORT,R2,GPIO_PUSH_PULL,GPIO_LOW_SPEED);
+	MGPIO_voidSetPinOutputMode(ROWS_PORT,R3,GPIO_PUSH_PULL,GPIO_LOW_SPEED);
+	MGPIO_voidSetPinOutputMode(ROWS_PORT,R4,GPIO_PUSH_PULL,GPIO_LOW_SPEED);
+	MGPIO_voidSetPinOutputMode(ROWS_PORT,R5,GPIO_PUSH_PULL,GPIO_LOW_SPEED);
+	MGPIO_voidSetPinOutputMode(ROWS_PORT,R6,GPIO_PUSH_PULL,GPIO_LOW_SPEED);
+	MGPIO_voidSetPinOutputMode(ROWS_PORT,R7,GPIO_PUSH_PULL,GPIO_LOW_SPEED);
+
+}
+
+void HLEDMRX_voidSendPattern(u8 *Copy_u8ptr)
+{
+	HLEDMRX_voidDisableColumns();
+
+	HLEDMRX_voidGetRowValue(Copy_u8ptr[0]);
+	MGPIO_voidSetPinValue(COLUMNS_PORT,C0,GPIO_PIN_LOW);
+	MSYSTICK_voidSetBusyWait(5000);
+
+	HLEDMRX_voidGetRowValue(Copy_u8ptr[1]);
+	MGPIO_voidSetPinValue(COLUMNS_PORT,C1,GPIO_PIN_LOW);
+	MSYSTICK_voidSetBusyWait(5000);
+
+	HLEDMRX_voidGetRowValue(Copy_u8ptr[2]);
+	MGPIO_voidSetPinValue(COLUMNS_PORT,C2,GPIO_PIN_LOW);
+	MSYSTICK_voidSetBusyWait(5000);
+
+	HLEDMRX_voidGetRowValue(Copy_u8ptr[3]);
+	MGPIO_voidSetPinValue(COLUMNS_PORT,C3,GPIO_PIN_LOW);
+	MSYSTICK_voidSetBusyWait(5000);
+
+	HLEDMRX_voidGetRowValue(Copy_u8ptr[4]);
+	MGPIO_voidSetPinValue(COLUMNS_PORT,C4,GPIO_PIN_LOW);
+	MSYSTICK_voidSetBusyWait(5000);
+
+	HLEDMRX_voidGetRowValue(Copy_u8ptr[5]);
+	MGPIO_voidSetPinValue(COLUMNS_PORT,C5,GPIO_PIN_LOW);
+	MSYSTICK_voidSetBusyWait(5000);
+
+	HLEDMRX_voidGetRowValue(Copy_u8ptr[6]);
+	MGPIO_voidSetPinValue(COLUMNS_PORT,C6,GPIO_PIN_LOW);
+	MSYSTICK_voidSetBusyWait(5000);
+
+	HLEDMRX_voidGetRowValue(Copy_u8ptr[7]);
+	MGPIO_voidSetPinValue(COLUMNS_PORT,C7,GPIO_PIN_LOW);
+	MSYSTICK_voidSetBusyWait(5000);
+
+}
+
+void HLEDMRX_voidGetRowValue(u8 Copy_u8RowValue)
+{
+	u8 READING;
+
+	READING = GET_BIT(Copy_u8RowValue,GPIO_PIN0);
+	MGPIO_voidSetPinValue(ROWS_PORT,R0,READING);
+
+	READING = GET_BIT(Copy_u8RowValue,GPIO_PIN1);
+	MGPIO_voidSetPinValue(ROWS_PORT,R1,READING);
+
+	READING = GET_BIT(Copy_u8RowValue,GPIO_PIN2);
+	MGPIO_voidSetPinValue(ROWS_PORT,R2,READING);
+
+	READING = GET_BIT(Copy_u8RowValue,GPIO_PIN3);
+	MGPIO_voidSetPinValue(ROWS_PORT,R3,READING);
+
+	READING = GET_BIT(Copy_u8RowValue,GPIO_PIN4);
+	MGPIO_voidSetPinValue(ROWS_PORT,R4,READING);
+
+	READING = GET_BIT(Copy_u8RowValue,GPIO_PIN5);
+	MGPIO_voidSetPinValue(ROWS_PORT,R5,READING);
+
+	READING = GET_BIT(Copy_u8RowValue,GPIO_PIN6);
+	MGPIO_voidSetPinValue(ROWS_PORT,R6,READING);
+
+	READING = GET_BIT(Copy_u8RowValue,GPIO_PIN7);
+	MGPIO_voidSetPinValue(ROWS_PORT,R7,READING);
+
+}
+
+
